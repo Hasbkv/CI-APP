@@ -13,7 +13,7 @@ class Mahasiswa_model extends CI_model
     public function getAllMahasiswa()
     {
         return $this->db->get('mahasiswa')->result_array();
-    }
+    } 
 
     // public function getMahasiswaById($id)
     // {
@@ -22,33 +22,33 @@ class Mahasiswa_model extends CI_model
     //     return $this->db->single();
     // }
 
-    // public function tambahDataMahasiswa($data)
-    // {
-    //     $query = "INSERT INTO mahasiswa
-    //               VALUES ('', :nama, :nrp, :email, :jurusan)";
-    //     $this->db->query($query);
+    public function tambahDataMahasiswa()
+    {
+        $data = [
+            "nama" => $this->input->post('nama', true),
+            "nrp" => $this->input->post('nrp', true),
+            "email" => $this->input->post('email', true),
+            "jurusan" => $this->input->post('jurusan', true)
+        ];
 
-    //     $this->db->bind('nama', $data['nama']);
-    //     $this->db->bind('nrp', $data['nrp']);
-    //     $this->db->bind('email', $data['email']);
-    //     $this->db->bind('jurusan', $data['jurusan']);
+        $this->db->insert('mahasiswa', $data);
+    }
 
-    //     $this->db->execute();
+    public function hapusDataMahasiswa($id)
+    {
+        $this->db->where('id' , $id);
+        $this->db->delete('mahasiswa');
+    }
 
-    //     return $this->db->affected_rows();
-    // }
+    // $query = "DELETE FROM mahasiswa
+        //           WHERE id=:id";
+        // $this->db->query($query);
+        // $this->db->bind('id', $id);
 
-    // public function hapusDataMahasiswa($id)
-    // {
-    //     $query = "DELETE FROM mahasiswa
-    //               WHERE id=:id";
-    //     $this->db->query($query);
-    //     $this->db->bind('id', $id);
+        // $this->db->execute();
 
-    //     $this->db->execute();
+        // return $this->db->affected_rows();
 
-    //     return $this->db->affected_rows();
-    // }
     //   public function ubahDataMahasiswa($data)
     // {
     //     $query = "UPDATE mahasiswa SET
